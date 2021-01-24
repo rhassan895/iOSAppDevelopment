@@ -28,12 +28,14 @@ print("\(tallKids)kids are tall")
 var optionalString: String? = "Hello"
 print(optionalString == nil)
 
-var optionalName: String? = "John Appleseed"
+//var optionalName: String? = "John Appleseed"
+var optionalName: String? = nil
 var greeting = "Hello!"
 if let name = optionalName {
     greeting = "Hello, \(name)"
+}else if optionalName == nil {
+    greeting = "Hey, how are you?"
 }
-
 //: - Experiment:
 //: Change `optionalName` to `nil`. What greeting do you get? Add an `else` clause that sets a different greeting if `optionalName` is `nil`.
 //:
@@ -44,7 +46,6 @@ if let name = optionalName {
 let nickname: String? = nil
 let fullName: String = "John Appleseed"
 let informalGreeting = "Hi \(nickname ?? fullName)"
-
 //: Switches support any kind of data and a wide variety of comparison operations—they aren’t limited to integers and tests for equality.
 //:
 let vegetable = "red pepper"
@@ -53,12 +54,12 @@ switch vegetable {
         print("Add some raisins and make ants on a log.")
     case "cucumber", "watercress":
         print("That would make a good tea sandwich.")
-    case let x where x.hasSuffix("pepper"):
-        print("Is it a spicy \(x)?")
+    case let x where x.hasSuffix("pepper"): //let used to assign value that matched pattern to a constant
+        print("Is it a spicy \(x)?") //x can now be used in scope
     default:
         print("Everything tastes good in soup.")
 }
-
+//the error I got was 'switch must be exhaustive'
 //: - Experiment:
 //: Try removing the default case. What error do you get?
 //:
@@ -74,10 +75,12 @@ let interestingNumbers = [
     "Square": [1, 4, 9, 16, 25],
 ]
 var largest = 0
+var largestType = ""
 for (kind, numbers) in interestingNumbers {
     for number in numbers {
         if number > largest {
             largest = number
+            largestType = kind
         }
     }
 }

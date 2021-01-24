@@ -3,7 +3,6 @@
 //: Tradition suggests that the first program in a new language should print the words “Hello, world!” on the screen. In Swift, this can be done in a single line:
 //:
 print("Hello, world!")
-
 //: If you have written code in C or Objective-C, this syntax looks familiar to you—in Swift, this line of code is a complete program. You don’t need to import a separate library for functionality like input/output or string handling. Code written at global scope is used as the entry point for the program, so you don’t need a `main()` function. You also don’t need to write semicolons at the end of every statement.
 //:
 //: This tour gives you enough information to start writing code in Swift by showing you how to accomplish a variety of programming tasks. Don’t worry if you don’t understand something—everything introduced in this tour is explained in detail in the rest of this book.
@@ -15,7 +14,8 @@ print("Hello, world!")
 var myVariable = 42
 myVariable = 50
 let myConstant = 42
-
+let daysLeapYear = 366
+var myAge = 17
 //: A constant or variable must have the same type as the value you want to assign to it. However, you don’t always have to write the type explicitly. Providing a value when you create a constant or variable lets the compiler infer its type. In the example above, the compiler infers that `myVariable` is an integer because its initial value is an integer.
 //:
 //: If the initial value doesn’t provide enough information (or if there is no initial value), specify the type by writing it after the variable, separated by a colon.
@@ -23,7 +23,7 @@ let myConstant = 42
 let implicitInteger = 70
 let implicitDouble = 70.0
 let explicitDouble: Double = 70
-
+let explicitFloat: Float = 4
 //: - Experiment:
 //: Create a constant with an explicit type of `Float` and a value of `4`.
 //:
@@ -32,7 +32,8 @@ let explicitDouble: Double = 70
 let label = "The width is "
 let width = 94
 let widthLabel = label + String(width)
-
+//let widthLabel = label + width
+//error is that '+' cannot be applied to two operands of different types
 //: - Experiment:
 //: Try removing the conversion to `String` from the last line. What error do you get?
 //:
@@ -53,6 +54,12 @@ I said "I have \(apples) apples."
 And then I said "I have \(apples + oranges) pieces of fruit."
 """
 
+let name = "Rashne"
+var age = 17
+var introduction = """
+Hello my name is \(name)
+and I'm \(age) years old
+"""
 //: Create arrays and dictionaries using brackets (`[]`), and access their elements by writing the index or key in brackets. A comma is allowed after the last element.
 //:
 var shoppingList = ["catfish", "water", "tulips"]
@@ -64,22 +71,29 @@ var occupations = [
  ]
 occupations["Jayne"] = "Public Relations"
 
+var groceryList = ["apple","chicken","banana","chips","hot sauce","popcorn"]
+var organizedGroceryList = [
+    "Fruits": ["apple","banana"],
+    "Snack": ["chips","popcorn","biscuits"],
+    "Garnish": ["hot sauce"],
+    "Protein": ["chicken"]
+]
 //: Arrays automatically grow as you add elements.
 //:
 shoppingList.append("blue paint")
 print(shoppingList)
-
+groceryList.append("biscuits")
 //: To create an empty array or dictionary, use the initializer syntax.
 //:
 let emptyArray = [String]()
 let emptyDictionary = [String: Float]()
-
+var vacationLuggage = [String]()
 //: If type information can be inferred, you can write an empty array as `[]` and an empty dictionary as `[:]`—for example, when you set a new value for a variable or pass an argument to a function.
 //:
 shoppingList = []
 occupations = [:]
-
-
+vacationLuggage = []
+vacationLuggage.append("sunglasses")
 
 //: See [License](License) for this sample's licensing information.
 //: 

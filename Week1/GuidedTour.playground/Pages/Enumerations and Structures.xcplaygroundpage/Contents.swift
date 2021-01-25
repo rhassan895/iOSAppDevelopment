@@ -81,6 +81,7 @@ let heartsDescription = hearts.simpleDescription()
 enum ServerResponse {
     case result(String, String)
     case failure(String)
+    case halfSuccess(String)
 }
 
 let success = ServerResponse.result("6:00 am", "8:09 pm")
@@ -89,6 +90,8 @@ let failure = ServerResponse.failure("Out of cheese.")
 switch success {
     case let .result(sunrise, sunset):
         print("Sunrise is at \(sunrise) and sunset is at \(sunset).")
+    case let .halfSuccess(sunrise):
+        print("Sunrise is at \(sunrise)")
     case let .failure(message):
         print("Failure...  \(message)")
 }
@@ -109,20 +112,20 @@ struct Card {
 }
 let threeOfSpades = Card(rank: .three, suit: .spades)
 let threeOfSpadesDescription = threeOfSpades.simpleDescription()
-//I'm not sure what's wrong with this? I'm getting the error 'cannot find spades in scope' in line 114
-func createDeck() -> Card {
-    var deck = Array (count: 52, repeatingValue: Card(ace, spades))
-    var suits = [Suit.spades, Suit.hearts, Suit.diamonds, Suit.clubs]
-    var counter = 0
-    
-    for i in 1...13 {
+func getDeck() -> [Card] {
+    let suits = [Suit.spades, Suit.hearts, Suit.diamonds, Suit.clubs]
+    let ranks = [Rank.ace, Rank.two, Rank.three, Rank.four, Rank.five, Rank.six, Rank.seven, Rank.eight, Rank.nine, Rank.ten, Rank.jack, Rank.queen, Rank.king]
+    var deck: Array<Card> = Array()
+    for rank in ranks {
         for suit in suits {
-            deck[counter+=1] = Card (rank: Rank.fromRaw(i), suit: suit)
+            deck.append(Card(rank: rank, suit: suit))
         }
     }
     return deck
 }
-
+//I was getting an error so I used
+// https://developer.apple.com/documentation/swift/array
+//to check line 118.
 //: - Experiment:
 //: Write a function that returns an array containing a full deck of cards, with one card of each combination of rank and suit.
 //:

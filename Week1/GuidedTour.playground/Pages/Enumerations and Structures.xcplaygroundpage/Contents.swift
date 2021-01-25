@@ -22,9 +22,13 @@ enum Rank: Int {
         }
     }
 }
+
 let ace = Rank.ace
 let aceRawValue = ace.rawValue
 
+func compRank(a:Rank,b:Rank) -> Bool {
+    return a.rawValue > b.rawValue
+}
 //: - Experiment:
 //: Write a function that compares two `Rank` values by comparing their raw values.
 //:
@@ -35,7 +39,6 @@ let aceRawValue = ace.rawValue
 if let convertedRank = Rank(rawValue: 3) {
     let threeDescription = convertedRank.simpleDescription()
 }
-
 //: The case values of an enumeration are actual values, not just another way of writing their raw values. In fact, in cases where there isn’t a meaningful raw value, you don’t have to provide one.
 //:
 enum Suit {
@@ -53,10 +56,21 @@ enum Suit {
                 return "clubs"
         }
     }
+    func color() -> String {
+        switch self {
+            case .spades:
+                return "black"
+            case .hearts:
+                return "red"
+            case .diamonds:
+                return "red"
+            case .clubs:
+                return "black"
+        }
+    }
 }
 let hearts = Suit.hearts
 let heartsDescription = hearts.simpleDescription()
-
 //: - Experiment:
 //: Add a `color()` method to `Suit` that returns “black” for spades and clubs, and returns “red” for hearts and diamonds.
 //:
@@ -95,6 +109,19 @@ struct Card {
 }
 let threeOfSpades = Card(rank: .three, suit: .spades)
 let threeOfSpadesDescription = threeOfSpades.simpleDescription()
+//I'm not sure what's wrong with this? I'm getting the error 'cannot find spades in scope' in line 114
+func createDeck() -> Card {
+    var deck = Array (count: 52, repeatingValue: Card(ace, spades))
+    var suits = [Suit.spades, Suit.hearts, Suit.diamonds, Suit.clubs]
+    var counter = 0
+    
+    for i in 1...13 {
+        for suit in suits {
+            deck[counter+=1] = Card (rank: Rank.fromRaw(i), suit: suit)
+        }
+    }
+    return deck
+}
 
 //: - Experiment:
 //: Write a function that returns an array containing a full deck of cards, with one card of each combination of rank and suit.

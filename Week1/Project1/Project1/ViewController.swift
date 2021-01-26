@@ -39,5 +39,13 @@ class ViewController: UITableViewController {
         //? do this if there is a textlabel there
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //if statement means if any of this fails, then the code won't execute
+        if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController{
+                vc.selectedImage = pictures[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
 
